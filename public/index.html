@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Reservation Search</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-image: url('./images/train-pictures-2 yellow.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: rgba(243, 247, 248, 0.808);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .navbar .logo span {
+            color: #007BFF;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: rgb(20, 38, 81);
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        .search-container {
+            background-color: #efe0e0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        .train-result {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .train-result h3 {
+            margin: 0 0 5px;
+        }
+
+        .loading {
+            font-size: 14px;
+            color: #007BFF;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="logo">
+            <span>Railway</span>App
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Rate Us</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Signup</a></li>
+            <li><a href="#">Log Out</a></li>
+        </ul>
+    </header>
+
+    <form id="search-form">
+        <label for="departure">Departure Station:</label>
+        <input type="text" id="departure" name="departureStation" required>
+    
+        <label for="arrival">Arrival Station:</label>
+        <input type="text" id="arrival" name="arrivalStation" required>
+    
+        <label for="date">Travel Date:</label>
+        <input type="date" id="date" name="date" required>
+    
+        <button type="submit">Search</button>
+    </form>
+    
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+    
+            // Get form values
+            const departureStation = document.getElementById('departure').value;
+            const arrivalStation = document.getElementById('arrival').value;
+            const travelDate = document.getElementById('date').value;
+    
+            // Validate data
+            if (!departureStation || departureStation.length < 3) {
+                alert("Please enter a valid departure station.");
+                return;
+            }
+            if (!arrivalStation || arrivalStation.length < 3) {
+                alert("Please enter a valid arrival station.");
+                return;
+            }
+            if (!travelDate) {
+                alert("Please enter a valid date.");
+                return;
+            }
+    
+            // Send data to server if validation is successful
+            fetch('/search-trains', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ departureStation, arrivalStation, travelDate })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.trains && data.trains.length > 0) {
+                    // Process train data here
+                    console.log(data.trains);
+                } else {
+                    alert("No trains found.");
+                }
+            });
+        });
+    </script>
+    </body>
+</html>

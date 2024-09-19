@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .otp-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .resend-otp {
+            margin-top: 10px;
+        }
+
+        .resend-otp a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .resend-otp a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="otp-container">
+        <h1>Enter OTP</h1>
+        <form id="otpForm" action="/verify-otp" method="POST">
+            <label for="otp">OTP Code:</label>
+            <input type="text" id="otp" name="otp" required>
+
+            <button type="submit">Verify OTP</button>
+        </form>
+
+        <div class="resend-otp">
+            <p>Didn't receive the OTP?</p>
+            <a href="#" id="resendOtp">Resend OTP</a>
+        </div>
+
+        <div id="otpStatus" style="margin-top: 20px; color: red;"></div>
+    </div>
+
+    <script>
+        document.getElementById('resendOtp').addEventListener('click', function (event) {
+            event.preventDefault();
+            fetch('/resend-otp', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    const statusDiv = document.getElementById('otpStatus');
+                    if (data.success) {
+                        statusDiv.textContent = 'OTP resent successfully!';
+                    } else {
+                        statusDiv.textContent = 'Failed to resend OTP. Please try again.';
+                    }
+                });
+        });
+
+        document.getElementById('otpForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const otp = document.getElementById('otp').value;
+
+            fetch('/verify-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: 'test@example.com', otp }) // You should dynamically set the email
+            })
+            .then(response => response.text())
+            .then(message => {
+                const statusDiv = document.getElementById('otpStatus');
+                statusDiv.textContent = message;
+                if (message.includes('successfully')) {
+                    // Redirect or perform further actions on success
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
