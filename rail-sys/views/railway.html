@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Book</title>
+    <link rel="stylesheet" href="/css/railway.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script src="/js/railway.js" defer></script> <!-- Ensure this is loaded after other scripts -->
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="/booking">Home</a></li>
+             
+            <li><a href="/userRailwayBookings">Train Tickets Bookings</a></li>
+
+            <li><a href="/booking">Go Back</a></li>
+            <li><a href="/instructions" data-instructions="Your instructions here">Instructions</a></li>
+            <li><a href="/login">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div id="dis">
+        <h1>Start Your Journey Here: <span style="color: green;">Railway Ticket Booking System</span></h1>
+        <h1 style="color: Blue;">Book Now</h1>
+    </div>
+    
+    <p id="dis2" style="color:black;">For traveling, choose your destination:</p>
+    
+    <form id="railway-booking-form" onsubmit="submitData(event)">
+        <label>Date</label>
+        <input type="date" id="date" name="date" required>
+        <div id="dateerror"></div><br>
+        
+        <label for="state">Your State:</label>
+        <select id="state" name="state" class="select">
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="State_Not_present_in_list">State Not Present in List</option>
+        </select><br><br>
+        
+        <label for="city">Your City:</label>
+        <select id="city" name="city" class="select"></select><br><br>
+        
+        <label for="train">Select Your Train:</label>
+        <select id="train" name="train" class="select"></select><br><br>
+        
+        <label for="other">If not listed, specify your route here (e.g., Mumbai-Pune):</label>
+        <input type="text" id="other" name="other" placeholder="If data is not present in above list, enter details [Your State, City, Train Name]"><br><br>
+        
+        <label>Number of Passengers</label>
+        <input type="number" id="passenger" name="number" placeholder="Number of Passengers" required><br><br>
+        
+        <label>Select Your Time</label>
+        <select name="time" id="time" class="select">
+            <option value="8:30 AM">8:30 AM</option>
+            <option value="8:45 AM">8:45 AM</option>
+            <option value="9:00 AM">9:00 AM</option>
+            <option value="9:30 AM">9:30 AM</option>
+            <option value="8:30 PM">8:30 PM</option>
+            <option value="9:30 PM">9:30 PM</option>
+        </select><br><br>
+        
+        <label for="ac">AC:</label>
+        <select id="ac" name="ac" class="select">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        
+        <label>Payment</label>
+        <select id="payment" name="payment">
+            <option value="cash">Cash</option>
+            <option value="card">Card</option>
+            <option value="online">Online</option>
+        </select><br><br>
+        
+        <button id="btn">Book Now</button>
+    </form>
+
+    <div id="booking_details"></div>
+
+</body>
+
+</html>

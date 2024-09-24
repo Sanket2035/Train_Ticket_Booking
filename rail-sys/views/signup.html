@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link rel="stylesheet" href="/css/signup.css">
+</head>
+
+<body>
+    <h1 style="text-align: center;">Welcome to the Transportation Booking System</h1>
+    <h2>
+        Start exploring now and unlock endless possibilities. Let's turn your travel aspirations into cherished memories.
+    </h2>
+    <form id="userFOrm" onsubmit="submitData(event)">
+        <h1 style="text-align: center;">Register for the Transportation Booking System</h1>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" placeholder="Your Namw"><br> <br>
+        <label>Email</label>
+        <input type="email" name="email" id="email" placeholder="Enter Your Email" required> <br> <br>
+        <label>Mobile Number</label>
+        <input type="tel" name="number" id="number" placeholder="Enter Your Mobile Number" required> <br> <br>
+        <label>Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter Your Password" required> <br> <br>
+        <label> Confirm Password</label>
+        <input type="password" name="cpassword" id="cpassword" placeholder="Re-enter Your Password" required> <br> <br>
+        <br> <br>
+        <button id="btn">Submit</button>
+        <a href="login">Already have an account</a>
+        <div id="errorPassword" style="color: red;"> </div>
+
+
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/signup.js"></script>
+</body>
+
+</html>

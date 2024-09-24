@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Transportation Booking System</title>
+    <link rel="stylesheet" href="/css/booking.css">
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="/booking">Home</a></li>
+ 
+            <li><a href="/userRailwayBookings">Train Tickets Bookings</a></li>
+             
+            <li><a href="/login">Go Back</a></li>
+            <li><a href="/instructions" data-instructions="Your instructions here">Instructions</a></li>
+            <li><a href="/login">Logout</a></li>
+        </ul>
+    </nav>
+
+    <h1>Step into the world of seamless travel planning with our Transportation Booking System</h1>
+    <p>Choose your preferred vehicle:</p>
+
+
+    <button onclick="redirectToRailway('railway')" id="btn3">Railway</button>
+    <button onclick="redirectToHomePage('home')" id="btn4" style="color: red;">Log-Out</button>
+    <script>
+        function redirectToBus() {
+            window.location.href = '/bus';
+        }
+
+        function redirectToTaxi() {
+            window.location.href = '/taxi';
+        }
+
+        function redirectToRailway() {
+            window.location.href = '/railway';
+        }
+
+        function redirectToHomePage() {
+            window.location.href = '/login';
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>

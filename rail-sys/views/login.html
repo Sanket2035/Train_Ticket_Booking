@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+    <h1 style="text-align: center;">Welcome to the Transportation Booking System</h1>
+    <h2>
+        Start exploring now and unlock endless possibilities. Let's turn your travel aspirations into cherished memories.
+    </h2>
+    <form id="form" onsubmit="Login(event)">
+        <h1>Log in to Reserve Your Preferred Vehicle</h1>
+        <label>Email</label>
+        <input type="email" name="email" id="email" placeholder="Enter Your Email" required> <br> <br>
+        <label>Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter Your Password" required> <br><br>
+        <button id="btn">Login</button>
+        <a href="/">New User Sign-up Here</a>
+        <a href="/forgotPassword" id="forgot-password">Forgot Password?</a>
+    </form>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/login.js"></script>
+
+</html>
